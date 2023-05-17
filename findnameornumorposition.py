@@ -22,5 +22,4 @@ def search_by_key_value(players, value):
     return result
 
 
-search_by_key_value()
-search_by_key()
+

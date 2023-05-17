@@ -1,5 +1,5 @@
 from batters_position import *
-from beforeupgrade.findnameornumorposition import *
+from findnameornumorposition import *
 
 
 class Player:
