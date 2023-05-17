@@ -1,4 +1,5 @@
 from batters_position import *
+
 player_dict = {
     13: Player("허경민", "내야수", 13),
     20: Player("안승한", "포수", 20),
@@ -29,68 +30,70 @@ player_dict = {
     51: Player("조수행", "외야수", 51),
     57: Player("양찬열", "외야수", 57)
 }
-players = []
 
+players = []
 selected_players = set()  # 입력된 선수들을 저장할 집합(set)
 
 for i in range(1, 10):
     while True:
-        number =int(input(f"{i}번 선수는 누구로 하시겠습니까? (선수 번호 또는 이름 입력): "))
+        number = input(f"{i}번 선수는 누구로 하시겠습니까? (선수 번호 또는 이름 입력): ")
 
         # 입력된 번호 또는 이름으로 선수 찾기
         found_players = [player for player in player_dict.values() if player.number == number or player.name == number]
 
         if len(found_players) == 0:
             print("선택한 선수가 없습니다. 다시 선택하세요.")
+            continue
         elif len(found_players) > 1:
             print("중복된 선수가 있습니다. 다시 선택하세요.")
-        else:
-            player = found_players[0]
-            break
-
-    if player in selected_players:
-        print("이미 선택한 선수입니다. 다른 선수를 선택하세요.")
-        continue
-
-    if player.position == "내야수":
-        if players.count(player) >= 5:
-            print("내야수는 5명까지 선택할 수 있습니다. 다시 선택하세요.")
-            continue
-    elif player.position == "외야수":
-        if players.count(player) >= 3:
-            print("외야수는 3명까지 선택할 수 있습니다. 다시 선택하세요.")
             continue
 
-    # 선수 변수에 할당
-    if i == 1:
-        player1 = player
-    elif i == 2:
-        player2 = player
-    elif i == 3:
-        player3 = player
-    elif i == 4:
-        player4 = player
-    elif i == 5:
-        player5 = player
-    elif i == 6:
-        player6 = player
-    elif i == 7:
-        player7 = player
-    elif i == 8:
-        player8 = player
-    elif i == 9:
-        player9 = player
+        player = found_players[0]
 
-    players.append(player)
-    selected_players.add(player)
+        if player in selected_players:
+            print("이미 선택한 선수입니다. 다른 선수를 선택하세요.")
+            continue
 
-    print(f"{player.position} {player.name} 선수가 추가되었습니다.")
+        if player.position == "내야수":
+            if players.count(player) >= 5:
+                print("내야수는 5명까지 선택할 수 있습니다. 다시 선택하세요.")
+                continue
+        elif player.position == "외야수":
+            if players.count(player) >= 3:
+                print("외야수는 3명까지 선택할 수 있습니다. 다시 선택하세요.")
+                continue
 
-    # 현재까지 선택된 선수들의 목록 출력
-    print("현재까지 선택된 선수들:")
-    for selected_player in players:
-        print(f"이름: {selected_player.name}, 포지션: {selected_player.position}")
-    print()
+        # 선수 변수에 할당
+        if i == 1:
+            player1 = player
+        elif i == 2:
+            player2 = player
+        elif i == 3:
+            player3 = player
+        elif i == 4:
+            player4 = player
+        elif i == 5:
+            player5 = player
+        elif i == 6:
+            player6 = player
+        elif i == 7:
+            player7 = player
+        elif i == 8:
+            player8 = player
+        elif i == 9:
+            player9 = player
 
-print(f"선택된 선수 수: {len(players)}명")
+        players.append(player)
+        selected_players.add(player)
 
+        print(f"{player.position} {player.name} 선수가 추가되었습니다.")
+
+        # 현재까지 선택된 선수들의 목록 출력
+        print("현재까지 선택된 선수들:")
+        for selected_player in players:
+            print(f"이름: {selected_player.name}, 포지션: {selected_player.position}")
+        print()
+
+    print(f"선택된 선수 수: {len(players)}명")
+
+print(players)

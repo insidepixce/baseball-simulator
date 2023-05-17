@@ -1,5 +1,4 @@
 from batters_position import *
-from beforeupgrade.findnameornum import *
 
 def search_by_value(players, value):
     result = []
@@ -21,3 +20,7 @@ def search_by_key_value(players, value):
             result.append((key, player))
             break
     return result
+
+
+search_by_key_value()
+search_by_key()
