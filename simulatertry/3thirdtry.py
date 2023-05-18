@@ -1,5 +1,5 @@
 import random
-from player import Player
+from classis import Player
 import pickle
 
 # 저장된 선수들을 파일에서 불러오기

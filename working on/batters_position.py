@@ -1,8 +1,5 @@
-class Player:
-    def __init__(self, name, position, number):
-        self.name = name
-        self.position = position
-        self.number = number
+from classis import Player
+
 
 player_dict = {
     13: Player("허경민", "내야수", 13),

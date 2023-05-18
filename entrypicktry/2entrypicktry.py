@@ -1,5 +1,5 @@
 from batters_position import *
-from findnameornumorposition import *
+
 
 class Player:
     def __init__(self, name, position, number):
