@@ -8,7 +8,7 @@ selected_players = set()
 while len(selected_players) < 9:
     name: str = input("선수를 입력하세요 (선수 번호 또는 이름): ")
 
-    # -> 번호 반영 안 됨g
+    # -> 번호 반영 안 됨
     # found_players = [player for player in player_dict.values() if player.name == name]
     found_players = list(filter(
         # -> "이름 또는 번호가 같으면"
