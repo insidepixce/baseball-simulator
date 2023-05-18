@@ -1,5 +1,5 @@
 from typing import List  # 타입 힌트용
-from classis import Player  # 타입 힌트용
+from classis import Player, Players  # 타입 힌트용
 from batters_position import player_dict
 import pickle
 import json  # 데이터 시각화용
@@ -44,8 +44,9 @@ while len(players) < 9:
             print(f"{player.position} {player.name} 선수가 추가되었습니다.")
 
 print("선수 선택이 완료되었습니다.")
-print(f"저장된 데이터:\n{json.dumps(players, sort_keys=True, indent=4)}")
+
+print(f"저장된 데이터:\n{json.dumps(Players.to_list(players), sort_keys=True, indent=4)}")
 
 # 선수 선택이 완료된 이후에 피클 파일 생성
 with open('selected_players.pkl', 'wb') as file:
-    pickle.dump(list(map(lambda player: player.__dict__, players)), file)
+    pickle.dump(Players.to_list(players), file)
