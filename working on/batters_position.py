@@ -1,7 +1,8 @@
+from typing import Dict
 from classis import Player
 
 
-player_dict = {
+player_dict: Dict[int, Player] = {
     13: Player("허경민", "내야수", 13),
     20: Player("안승한", "포수", 20),
     22: Player("장승현", "포수", 22),
