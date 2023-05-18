@@ -1,4 +1,9 @@
 class Player:
+    name: str
+    position: str
+    number: int
+    selected: bool
+    
     def __init__(self, name, position, number):
         self.name = name
         self.position = position
