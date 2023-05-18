@@ -12,7 +12,7 @@ while len(selected_players) < 9:
     # found_players = [player for player in player_dict.values() if player.name == name]
     found_players = list(filter(
         # -> "이름 또는 번호가 같으면"
-        lambda p: p.name == name or p.number == int(name),
+        lambda p: p.name == name or str.isdigit(name) and p.number == int(name),
         player_dict.values()
     ))
 
