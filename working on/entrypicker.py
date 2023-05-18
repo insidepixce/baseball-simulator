@@ -5,9 +5,14 @@ players = []
 selected_players = set()
 
 while len(selected_players) < 9:
-    name = input("선수를 입력하세요 (선수 번호 또는 이름): ")
+    name: str = input("선수를 입력하세요 (선수 번호 또는 이름): ")
 
-    found_players = [player for player in player_dict.values() if player.name == name]
+    # found_players = [player for player in player_dict.values() if player.name == name]
+    found_players = list(filter(
+        # -> 이름 또는 번호가 같으면
+        lambda p: p.name == name or p.number == int(name),
+        player_dict.values()
+    ))
 
     if len(found_players) == 0:
         print("선택한 선수가 없습니다. 다시 선택하세요.")
