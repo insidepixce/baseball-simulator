@@ -49,8 +49,10 @@ while out_count < 3:
     # 선수들 순환
     while players:
         selected_players = [player for player in players if player.selected]
+        
         if len(selected_players) == len(players):
             break  # 모든 선수가 선택된 경우 게임 종료
+        
         available_players = [player for player in players if not player.selected]
         player = random.choice(available_players)
         player.selected = True
