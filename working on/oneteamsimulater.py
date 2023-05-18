@@ -1,16 +1,8 @@
 import random
 import pickle
-
-# Player 클래스 정의
-class Player:
-    def __init__(self, name, position, number, selected=False):
-        self.name = name
-        self.position = position
-        self.number = number
-        self.selected = selected
-
-    def __str__(self):
-        return f"이름: {self.name}, 포지션: {self.position}, 번호: {self.number}"
+from jason import *
+from classis import *
+from entrypicker import players
 
 # 이닝 후 베이스 상황 출력하는 함수
 def basecall():
@@ -21,9 +13,6 @@ def basecall():
     print(f"홈: {home}")
     print()
 
-# selected_players.pkl 파일에서 선수 정보 가져오기
-with open("selected_players.pkl", "rb") as file:
-    players = list(pickle.load(file))
 
 # 경기 진행
 inning_count = 1
@@ -49,7 +38,7 @@ while out_count < 3:
         if len(selected_players) == len(players):
             break  # 모든 선수가 선택된 경우 게임 종료
         available_players = [player for player in players if not player.selected]
-        player = random.choice(available_players)
+        player = available_players
         player.selected = True
         print(f"{player.name} 타석에 들어섰습니다.")
         strikes = 0
