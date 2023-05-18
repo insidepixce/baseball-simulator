@@ -48,4 +48,4 @@ print(f"저장된 데이터:\n{json.dumps(players, sort_keys=True, indent=4)}")
 
 # 선수 선택이 완료된 이후에 피클 파일 생성
 with open('selected_players.pkl', 'wb') as file:
-    pickle.dump(players, file)
+    pickle.dump(list(map(lambda player: player.__dict__, players)), file)
