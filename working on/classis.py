@@ -1,3 +1,5 @@
+from typing import List
+
 class Player:
     name: str
     position: str
@@ -12,3 +14,8 @@ class Player:
 
     def __str__(self):
         return f"이름: {self.name}, 포지션: {self.position}, 번호: {self.number}"
+
+class Players:
+    @staticmethod
+    def to_list(players: List[Player]):
+        return list(map(lambda player: player.__dict__, players))
