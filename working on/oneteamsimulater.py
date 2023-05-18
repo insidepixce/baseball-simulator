@@ -1,8 +1,16 @@
 import random
 import pickle
 
-from classis import Player
+# Player 클래스 정의
+class Player:
+    def __init__(self, name, position, number, selected=False):
+        self.name = name
+        self.position = position
+        self.number = number
+        self.selected = selected
 
+    def __str__(self):
+        return f"이름: {self.name}, 포지션: {self.position}, 번호: {self.number}"
 
 # 이닝 후 베이스 상황 출력하는 함수
 def basecall():
@@ -12,17 +20,6 @@ def basecall():
     print(f"3루: {base3}")
     print(f"홈: {home}")
     print()
-
-# Player 클래스 정의
-class Player:
-    def __init__(self, name, position, number):
-        self.name = name
-        self.position = position
-        self.number = number
-        self.selected = False
-
-    def __str__(self):
-        return f"이름: {self.name}, 포지션: {self.position}, 번호: {self.number}"
 
 # selected_players.pkl 파일에서 선수 정보 가져오기
 with open("selected_players.pkl", "rb") as file:
@@ -138,4 +135,3 @@ while out_count < 3:
 
 # 게임 종료
 print("경기 종료!")
-

@@ -100,7 +100,7 @@ while out_count < 3:
                     home = base2
                     base2 = None
                 if base3 is not None:
-                    home = base3
+                    home = base3##
                     base3 = None
                 base3 = current_player
                 doosan += 1
