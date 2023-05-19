@@ -3,7 +3,9 @@ from typing import List, Union, Literal
 import random
 import pickle
 
-from classis import Player, Players
+from jason import *
+from classis import *
+from entrypicker import players
 
 
 # 이닝 후 베이스 상황 출력하는 함수
@@ -15,19 +17,6 @@ def basecall():
     print(f"홈: {home}")
     print()
 
-# Player 클래스 정의부 제거 (의존성은 하나만)
-players: List[Player] = []  # entrypicker에서 선택된 선수 리스트
-cloned_players: List[Player] = []  # selected 요소가 초기화된 리스트
-
-# selected_players.pkl 파일에서 선수 정보 가져오기
-with open("players.pkl", "rb") as file:
-    pickled_players = pickle.load(file)  # 정상적으로 저장되었다면, list()를 사용하지 않아도 list로 저장됨
-
-    if type(pickled_players) == list:
-        players = Players.to_players(pickled_players)
-        for player in players:
-            player.selected = False
-            cloned_players.append(player)
 
 # 경기 진행
 inning_count: int = 1
@@ -46,17 +35,14 @@ while out_count < 3:
     home = None
 
     # 선수들 순환
-    # while players:  # players는 truthy 값 -> 무한 반복
-    random.shuffle(cloned_players)
-    for player in cloned_players:
-        # selected_players = list(filter(lambda player: player.selected, cloned_players))
-        
-        # if len(selected_players) == len(cloned_players):
-        #     break  # 모든 선수가 선택된 경우 게임 종료
-        
-        # available_players = list(filter(lambda player: not player.selected, cloned_players))
-    
-        # player = random.choice(available_players)
+
+    while players:
+        selected_players = [player for player in players if player.selected]
+        if len(selected_players) == len(players):
+            break  # 모든 선수가 선택된 경우 게임 종료
+        available_players = [player for player in players if not player.selected]
+        player = available_players
+
         player.selected = True
         
         print(f"{player.name} 타석에 들어섰습니다.")
@@ -146,4 +132,3 @@ while out_count < 3:
 
 # 게임 종료
 print("경기 종료!")
-
