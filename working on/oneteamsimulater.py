@@ -1,8 +1,12 @@
+from typing import List, Union, Literal
+
 import random
 import pickle
+
 from jason import *
 from classis import *
 from entrypicker import players
+
 
 # 이닝 후 베이스 상황 출력하는 함수
 def basecall():
@@ -15,17 +19,15 @@ def basecall():
 
 
 # 경기 진행
-inning_count = 1
-out_count = 0
-doosan = 0
+inning_count: int = 1
+out_count: int = 0
+doosan: int = 0
 
-# 선수들의 결과 기록 초기화
-player_results = {player: None for player in players}
 
 # 메인 게임 루프
 while out_count < 3:
-    print('--------------------------------'*5)
-    print('--------------------------------'*5)
+    print('-'*32*5)
+    print('-'*32*5)
     print(f"{inning_count}이닝 시작!")
     base1 = None
     base2 = None
@@ -33,19 +35,24 @@ while out_count < 3:
     home = None
 
     # 선수들 순환
+
     while players:
         selected_players = [player for player in players if player.selected]
         if len(selected_players) == len(players):
             break  # 모든 선수가 선택된 경우 게임 종료
         available_players = [player for player in players if not player.selected]
         player = available_players
+
         player.selected = True
+        
         print(f"{player.name} 타석에 들어섰습니다.")
+        
         strikes = 0
 
         # 타격 루프
         while strikes < 3:
             result = random.choice(["스트라이크", "헛스윙", "치다", "홈런", "볼"])
+
             print(f"{player.name}: {result}")
 
             # 결과 처리
@@ -56,6 +63,7 @@ while out_count < 3:
                 print("볼!")
             elif result == "치다":
                 hit_result = random.choice(["아웃", "플라이아웃", "1루타", "2루타", "3루타"])
+                
                 print(f"{player.name}: {hit_result}")
 
                 if hit_result == "1루타":
