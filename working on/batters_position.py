@@ -1,8 +1,5 @@
-from typing import Dict
+from typing import List, Dict, Union
 from classis import Player
-
-
-
 
 """
 수정 내용:
@@ -42,5 +39,5 @@ player_dict: list[Player] = [
     Player("강진성", "외야수", 49, False),
     Player("조수행", "외야수", 51, False),
     Player("양찬열", "외야수", 57, False)
-]
 
+]

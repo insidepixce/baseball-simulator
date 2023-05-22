@@ -1,126 +1,71 @@
 import random
-import pickle
-from jason import *
-from classis import *
-from entrypicker import players
 
-# 이닝 후 베이스 상황 출력하는 함수
-def basecall():
-    print("이닝 종료 후 베이스 상황:")
-    print(f"1루: {base1}")
-    print(f"2루: {base2}")
-    print(f"3루: {base3}")
-    print(f"홈: {home}")
-    print()
+class Player:
+    def __init__(self, name, position, number):
+        self.name = name
+        self.position = position
+        self.number = number
+        self.strike = 0  # 선수의 스트라이크 카운트
+        self.hithit = 0  # 이 선수가 이번 이닝에서 안타를 친 횟수
 
+class Inning:
+    def __init__(self):
+        self.bases = [None, None, None, None, None]  # 1루, 2루, 3루, 홈
+        self.outs = 0  # 아웃 카운트
+        self.score = 0  # 점수
 
-# 경기 진행
-inning_count = 1
-out_count = 0
-doosan = 0
+    def player_hit(self, player, hit_base):
+        print(f"{player.name} 선수가 {hit_base}루타를 쳤습니다.")
+        # 타자가 안타를 치면 모든 베이스 상의 선수들이 hit_base만큼 전진
+        for i in range(3, 0, -1):
+            if i >= hit_base and self.bases[i-hit_base] is not None:
+                if i == 3:
+                    self.score += 1
+                    print("득점! 현재 점수: ", self.score)
+                self.bases[i] = self.bases[i-hit_base]
+                self.bases[i-hit_base] = None
+        self.bases[hit_base] = player
+        player.hithit = 1
 
-# 선수들의 결과 기록 초기화
-player_results = {player: None for player in players}
+    def player_strike(self, player):
+        player.strike += 1
+        if player.strike == 3:
+            self.player_out(player)
+            player.strike = 0  # 선수의 스트라이크 카운트 초기화
 
-# 메인 게임 루프
-while out_count < 3:
-    print('--------------------------------'*5)
-    print('--------------------------------'*5)
-    print(f"{inning_count}이닝 시작!")
-    base1 = None
-    base2 = None
-    base3 = None
-    home = None
+    def player_out(self, player):
+        print(f"{player.name} 아웃!")
+        self.outs += 1
+        if self.outs >= 3:  # 3아웃이면 이닝 종료
+            self.end_inning()
 
-    # 선수들 순환
-    while players:
-        selected_players = [player for player in players if player.selected]
-        if len(selected_players) == len(players):
-            break  # 모든 선수가 선택된 경우 게임 종료
-        available_players = [player for player in players if not player.selected]
-        player = available_players
-        player.selected = True
-        print(f"{player.name} 타석에 들어섰습니다.")
-        strikes = 0
+    def end_inning(self):
+        print("이닝 종료!")
+        for player in self.bases:
+            if player is not None:
+                player.hithit = 0  # 모든 선수의 안타 카운트 초기화
+        self.bases = [None, None, None, None]  # 베이스 초기화
+        self.outs = 0  # 아웃 카운트 초기화
 
-        # 타격 루프
-        while strikes < 3:
-            result = random.choice(["스트라이크", "헛스윙", "치다", "홈런", "볼"])
-            print(f"{player.name}: {result}")
+def play_game():
+    players = []
+    for i in range(1, 10):
+        player_name = input(f"선수 {i}의 이름을 입력하세요: ")
+        players.append(Player(player_name, "포지션"+str(i), i))
 
-            # 결과 처리
-            if result == "스트라이크" or result == "헛스윙":
-                strikes += 1
-                print("스트라이크!")
-            elif result == "볼":
-                print("볼!")
-            elif result == "치다":
-                hit_result = random.choice(["아웃", "플라이아웃", "1루타", "2루타", "3루타"])
-                print(f"{player.name}: {hit_result}")
-
-                if hit_result == "1루타":
-                    if base3 is not None:
-                        doosan += 1
-                        base3 = None
-                    if base2 is not None:
-                        base3 = base2
-                        base2 = None
-                    if base1 is not None:
-                        base2 = base1
-                        base1 = None
-                    base1 = player
-                    strikes = 0
-                elif hit_result == "2루타":
-                    if base3 is not None:
-                        doosan += 1
-                        base3 = None
-                    if base2 is not None:
-                        doosan += 1
-                        base2 = None
-                    if base1 is not None:
-                        base3 = base1
-                        base1 = None
-                    base2 = player
-                    strikes = 0
-                elif hit_result == "3루타":
-                    if base3 is not None:
-                        doosan += 1
-                        base3 = None
-                    if base2 is not None:
-                        doosan += 1
-                        base2 = None
-                    if base1 is not None:
-                        doosan += 1
-                        base1 = None
-                    base3 = player
-                    strikes = 0
-                elif hit_result == "아웃" or hit_result == "플라이아웃":
-                    print(f"{player.name} 아웃!")
-                    out_count += 1
+    for inning_number in range(1, 10):  # 게임을 9번 반복 (9이닝)
+        print(f"\n{inning_number}번째 이닝 시작!")
+        inning = Inning()
+        for player in players:
+            print(f"{player.name} 선수가 타석에 나왔습니다.")
+            while True:
+                action = random.randint(0, 4)
+                if action == 0:  # 스트라이크
+                    inning.player_strike(player)
+                else:  # 1루타, 2루타, 3루타, 홈런
+                    inning.player_hit(player, action)
+                if inning.outs >= 3 or player.hithit == 1:
                     break
-            elif result == "홈런":
-                doosan += 1
-                if base1 is not None:
-                    doosan += 1
-                    base1 = None
-                if base2 is not None:
-                    doosan += 1
-                    base2 = None
-                if base3 is not None:
-                    doosan += 1
-                    base3 = None
-                print(f"{player.name} 홈런!")
+        print(f"{inning_number}번째 이닝 종료, 현재 점수: {inning.score}")
 
-            # 각 타격 후 베이스 상황 출력
-            basecall()
-
-        if out_count >= 3:
-            break
-
-    # 이닝 종료 후 점수 출력
-    print(f"{inning_count}이닝 종료!")
-    print(f"두산: {doosan} 점")
-    inning_count += 1
-
-# 게임 종료
-print("경기 종료!")
+play_game()
