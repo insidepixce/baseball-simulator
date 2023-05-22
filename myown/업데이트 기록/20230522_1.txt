@@ -1,0 +1,11 @@
+업데이트\
+
+2023.5월.22일 월요일 업데이트
+playerpicker 
+-playerlist.py에 있는 선수들 사용자가 9명 입력
+-텍스트 형태로 hometeam_entry_list 에 정리
+-homeentrychanger로 다시 딕셔너리로 변경
+print(hbatter_dict["hbatter1"])
+print(hbatter_dict[f"hbatter{i+1}"][0])
+식으로 읽어낼 수 있음
+
