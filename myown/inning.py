@@ -1,24 +1,39 @@
 import random
 from homeentrychanger import hbatter_dict
 
-def throw_a_ball(hbatter_dict):
-        first_player=next(iter(hbatter_dict))
-        name, position, number = hbatter_dict[first_player]
-        throwball = random.choice(["치다", "헛스윙", "스트라이크", "볼"])
-        print(f"{name}({position}, {number}) - {throwball}")
-
-throw_a_ball(hbatter_dict)
-
+def throw_a_ball1(hbatter_dict):
+    player_number = 1
+    for player, info in hbatter_dict.items():
+        if info[2] == player_number:
+            name, position, number = info
+            throwball = random.choice(["치다", "헛스윙", "스트라이크", "볼"])
+            print(f"{name}({position}, {number}) - {throwball}")
+            break
 
 def throw_a_ball2(hbatter_dict):
-        second_player=next(iter(hbatter_dict))
-        name, position, number = hbatter_dict[second_player]
-        throwball = random.choice(["치다", "헛스윙", "스트라이크", "볼"])
-        print(f"{name}({position}, {number}) - {throwball}")
+    player_number = 2
+    for player, info in hbatter_dict.items():
+        if info[2] == player_number:
+            name, position, number = info
+            throwball = random.choice(["치다", "헛스윙", "스트라이크", "볼"])
+            print(f"{name}({position}, {number}) - {throwball}")
+            break
 
-throw_a_ball(hbatter_dict)
+# throw_a_ball3 ~ throw_a_ball9에 대해서도 동일한 방식으로 수정해줍니다.
+
+throw_a_ball1(hbatter_dict)
 throw_a_ball2(hbatter_dict)
+# throw_a_ball3(hbatter_dict)
+# throw_a_ball4(hbatter_dict)
+# throw_a_ball5(hbatter_dict)
+# throw_a_ball6(hbatter_dict)
+# throw_a_ball7(hbatter_dict)
+# throw_a_ball8(hbatter_dict)
+# throw_a_ball9(hbatter_dict)
 
+
+#두번째 선수를 선택하기 위해서는 첫 번째 선수를 이미 사용한 후에 댜음 선수를 선택해야함. 
+#throw_a_ball 함수와 throw_a_ball2 함수에서 'next(iter(hbatter_dict))'를 호출하기 전에 next(iter(hbatter_dict))를 한번 더 호출하기
 
 
 """
