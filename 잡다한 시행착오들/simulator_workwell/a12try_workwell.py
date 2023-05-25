@@ -35,7 +35,7 @@ while not game_over:
         print(f"\n{current_player.name}({current_player.number}번 타자)가 타석에 들어섰습니다.")
         play_result = random.choice(["안타", "아웃", "홈런"])
         if play_result == "안타":
-            print(f"{current_player.name}({current_player.number}번 타자)가 안타를 칩니다.")
+            print(f"{current_playe.name}({current_player.number}번 타자)가 안타를 칩니다.")
             for i in range(3, 0, -1):
                 if bases[i] is not None:
                     bases[i] = None

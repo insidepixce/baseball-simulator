@@ -1,10 +1,9 @@
-Name: 허경민, Position: 내야수, Number: 13
 Name: 정수빈, Position: 외야수, Number: 31
 Name: 이유찬, Position: 내야수, Number: 7
-Name: 안갈비, Position: 내야수, Number: 3
-Name: 로하스, Position: 외야수, Number: 11
+Name: 양석환, Position: 내야수, Number: 53
 Name: 김재환, Position: 외야수, Number: 32
-Name: 김대한, Position: 외야수, Number: 37
-Name: 양의지, Position: 포수, Number: 25
-Name: 박계범, Position: 내야수, Number: 14
- 
+Name: 김민혁, Position: 내야수, Number: 18
+Name: 로하스, Position: 외야수, Number: 11
+Name: 허경민, Position: 내야수, Number: 13
+Name: 안승한, Position: 포수, Number: 20
+Name: 김재호, Position: 내야수, Number: 52
