@@ -8,7 +8,7 @@ def throw_a_ball1(hbatter_dict):
             name, position, number = info
             throwball = random.choice(["치다", "헛스윙", "스트라이크", "볼"])
             print(f"{name}({position}, {number}) - {throwball}")
-            break
+            return
 
 def throw_a_ball2(hbatter_dict):
     player_number = 2
@@ -17,13 +17,24 @@ def throw_a_ball2(hbatter_dict):
             name, position, number = info
             throwball = random.choice(["치다", "헛스윙", "스트라이크", "볼"])
             print(f"{name}({position}, {number}) - {throwball}")
-            break
+            return
 
-# throw_a_ball3 ~ throw_a_ball9에 대해서도 동일한 방식으로 수정해줍니다.
+def throw_a_ball3(hbatter_dict):
+    player_number = 3
+    for player, info in hbatter_dict.items():
+        if info[2] == player_number:
+            name, position, number = info
+            throwball = random.choice(["치다", "헛스윙", "스트라이크", "볼"])
+            print(f"{name}({position}, {number}) - {throwball}")
+            return
 
 throw_a_ball1(hbatter_dict)
 throw_a_ball2(hbatter_dict)
-# throw_a_ball3(hbatter_dict)
+throw_a_ball3(hbatter_dict)
+
+
+
+
 # throw_a_ball4(hbatter_dict)
 # throw_a_ball5(hbatter_dict)
 # throw_a_ball6(hbatter_dict)
@@ -31,7 +42,12 @@ throw_a_ball2(hbatter_dict)
 # throw_a_ball8(hbatter_dict)
 # throw_a_ball9(hbatter_dict)
 
+#----
 
+# break 문은 반복문을 종료하기 때문에 다음 선수들의 결과가 출력되지 않는다
+
+
+#-----
 #두번째 선수를 선택하기 위해서는 첫 번째 선수를 이미 사용한 후에 댜음 선수를 선택해야함. 
 #throw_a_ball 함수와 throw_a_ball2 함수에서 'next(iter(hbatter_dict))'를 호출하기 전에 next(iter(hbatter_dict))를 한번 더 호출하기
 
