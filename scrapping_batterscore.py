@@ -16,8 +16,8 @@ else:
     # BeautifulSoup을 사용하여 HTML 파싱
     soup = BeautifulSoup(html, 'html.parser')
 
-    # 타자 기록 테이블 추출
-    table = soup.find('table', class_='record_table')
+    # 타자 기록 테이블을 찾기 위한 선택자 확인
+    table = soup.find('table', class_='record_tbl')
 
     if table is not None:
         # 테이블의 헤더 추출
@@ -33,7 +33,7 @@ else:
         df = pd.DataFrame(rows, columns=headers)
 
         # DataFrame을 엑셀 파일로 저장
-        df.to_excel('baseball_records.xlsx', index=False)
+        df.to_excel('dosan_baseball_records.xlsx', index=False)
         print('엑셀 파일로 저장되었습니다.')
     else:
         print('타자 기록 테이블을 찾을 수 없습니다.')

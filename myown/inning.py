@@ -33,7 +33,7 @@ throw_a_ball2(hbatter_dict)
 throw_a_ball3(hbatter_dict)
 
 
-
+#이랬는데 실행이 안됨..,,           
 
 # throw_a_ball4(hbatter_dict)
 # throw_a_ball5(hbatter_dict)
